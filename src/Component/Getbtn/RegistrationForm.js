@@ -31,7 +31,7 @@ function RegistrationForm() {
             .then(async (res) => {
                 setSubmitButtonDisabled(false);
 
-                navigate("/");
+                navigate("/DataFetch");
             })
             .catch((err) => {
                 setSubmitButtonDisabled(false);
@@ -74,7 +74,7 @@ function RegistrationForm() {
             </div>
             <div className='googlesign'>
                 <div><button  > Google</button></div>
-                <div><button  > <FontAwesomeIcon icon={faPhone} /> Phone</button></div>
+
 
             </div>
 

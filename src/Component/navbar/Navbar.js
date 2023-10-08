@@ -1,7 +1,8 @@
 import React from 'react';
 import './Navbar.css'
-import { Link } from 'react-router-dom';
+import { Link, Route, Router, Switch } from 'react-router-dom';
 import logo from './logo.png'; // Import the image
+import CutCal from '../userInput/custCal';
 
 const Navbar = () => {
     return (
@@ -11,7 +12,9 @@ const Navbar = () => {
             <div className='linkComent'>
                 <Link className='linktwo' to="/">Dashboard</Link>
                 <Link className='linktwo' to="/RegistrationForm">Get Started</Link>
-                <Link className='linktwo' to="/Calendar">Calendar</Link>
+                {/* <Link className='linktwo' to="/DataFetch">Calendar</Link> */}
+
+
             </div>
 
         </div>

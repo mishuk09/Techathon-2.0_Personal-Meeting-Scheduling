@@ -7,10 +7,7 @@ import axios from 'axios'; // Missing import
 import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
 import AppointmentForm from './AppointmentForm';
-import { title } from 'process';
-// const nodemailer = require('nodemailer');
-// const fs = require('fs-extra');
-import './DataFetch.css';
+import { useParams } from 'react-router-dom';
 
 const localizer = momentLocalizer(moment);
 
@@ -30,9 +27,10 @@ const YOUR_CLIENT_ID = '762223999493-33ebbolgqdqdf6kebcco75l8jgt9j5cl.apps.googl
 const YOUR_CLIENT_SECRET = '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';
 const YOUR_REDIRECT_URI = 'https://techathon-2-0-personal-meeting-scheduling.vercel.app/auth/callback';
 
-const DataFetch = () => {
+const CustCal = () => {
+    const name = useParams();
     const [events, setEvents] = useState([]);
-    const [accessToken, setAccessToken] = useState('');
+    const [accessToken, setAccessToken] = useState('ya29.a0AfB_byDyQwdzpNH57GvxBGvBom-nISaes15RuXJhUuCZqdhDvTvHQRbnXo5AenPevENC0yOkUHVzZ-7mMhaeMvno1ODf2_RuAab_ubtsiHxRT8sDloYqWvH8tkIe8XSSMYcvElsYTvqQsDXaru_EknM2ndC-4S_7UzkaCgYKAVYSARMSFQGOcNnCkzSr1GVrKQmH5ogzo0rqGg0170');
     const [googleMeetEvents, setGoogleMeetEvents] = useState([]);
     const [loadingGoogleMeet, setLoadingGoogleMeet] = useState(false);
 
@@ -99,7 +97,7 @@ const DataFetch = () => {
     const fetchGoogleCalendarEvents = async (accessToken) => {
         try {
             const response = await axios.get(
-                `https://www.googleapis.com/calendar/v3/calendars/mmishuk694@rku.ac.in/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
+                `https://www.googleapis.com/calendar/v3/calendars/${name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -155,7 +153,7 @@ const DataFetch = () => {
             };
 
             await axios.post(
-                `https://www.googleapis.com/calendar/v3/calendars//mmishuk694@rku.ac.in/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
+                `https://www.googleapis.com/calendar/v3/calendars/${name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
                 googleEvent,
                 {
                     headers: {
@@ -221,4 +219,4 @@ const DataFetch = () => {
     );
 };
 
-export default DataFetch;
+export default CustCal;

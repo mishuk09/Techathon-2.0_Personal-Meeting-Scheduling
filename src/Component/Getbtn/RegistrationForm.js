@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { signInWithEmailAndPassword } from "firebase/auth";
+import DataFetch from '../DataFetch/DataFetch';
 
 
 import { auth } from "../../firebase";

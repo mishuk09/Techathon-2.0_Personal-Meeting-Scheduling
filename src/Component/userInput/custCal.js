@@ -29,8 +29,10 @@ const YOUR_REDIRECT_URI = 'https://techathon-2-0-personal-meeting-scheduling.ver
 
 const CustCal = () => {
     const name = useParams();
+    console.log(name.name);
     const [events, setEvents] = useState([]);
-    const [accessToken, setAccessToken] = useState('ya29.a0AfB_byDyQwdzpNH57GvxBGvBom-nISaes15RuXJhUuCZqdhDvTvHQRbnXo5AenPevENC0yOkUHVzZ-7mMhaeMvno1ODf2_RuAab_ubtsiHxRT8sDloYqWvH8tkIe8XSSMYcvElsYTvqQsDXaru_EknM2ndC-4S_7UzkaCgYKAVYSARMSFQGOcNnCkzSr1GVrKQmH5ogzo0rqGg0170');
+    const accessToken = "ya29.a0AfB_byDyQwdzpNH57GvxBGvBom-nISaes15RuXJhUuCZqdhDvTvHQRbnXo5AenPevENC0yOkUHVzZ-7mMhaeMvno1ODf2_RuAab_ubtsiHxRT8sDloYqWvH8tkIe8XSSMYcvElsYTvqQsDXaru_EknM2ndC-4S_7UzkaCgYKAVYSARMSFQGOcNnCkzSr1GVrKQmH5ogzo0rqGg0170";
+    // const [accessToken, setAccessToken] = useState(accessTokens);
     const [googleMeetEvents, setGoogleMeetEvents] = useState([]);
     const [loadingGoogleMeet, setLoadingGoogleMeet] = useState(false);
 
@@ -55,7 +57,7 @@ const CustCal = () => {
     }, []);
 
     useEffect(() => {
-        (setAccessToken(localStorage.getItem("accesstoken")))
+        // (setAccessToken(localStorage.getItem("accesstoken")))
     }, [])
 
     const handleSignIn = () => {
@@ -64,7 +66,7 @@ const CustCal = () => {
     };
 
     const handleSignOut = () => {
-        setAccessToken('');
+        // setAccessToken('');
         setEvents([]);
     };
 
@@ -83,7 +85,7 @@ const CustCal = () => {
                     },
                 }
             );
-            setAccessToken(response.data.access_token);
+            // setAccessToken(response.data.access_token);
             localStorage.setItem("accesstoken", response.data.access_token)
 
             console.log('Access Token:', response.data.access_token);
@@ -97,7 +99,7 @@ const CustCal = () => {
     const fetchGoogleCalendarEvents = async (accessToken) => {
         try {
             const response = await axios.get(
-                `https://www.googleapis.com/calendar/v3/calendars/${name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
+                `https://www.googleapis.com/calendar/v3/calendars/${name.name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -128,7 +130,7 @@ const CustCal = () => {
         try {
             setLoadingGoogleMeet(true);
             const response = await axios.get(
-                'https://www.googleapis.com/calendar/v3/calendars/primary/events',
+                `https://www.googleapis.com/calendar/v3/calendars/${name.name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -153,7 +155,7 @@ const CustCal = () => {
             };
 
             await axios.post(
-                `https://www.googleapis.com/calendar/v3/calendars/${name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
+                `https://www.googleapis.com/calendar/v3/calendars/${name.name}/events?key=AIzaSyCMji7wJdIUdUHkcAmbOSlp1rdztffuD20`,
                 googleEvent,
                 {
                     headers: {
@@ -194,7 +196,7 @@ const CustCal = () => {
             ) : (
                 <button onClick={handleSignIn}>Sign In with Google</button>
             )}
-            <AppointmentForm />
+            {/* <AppointmentForm /> */}
             <button onClick={handleRefresh}>refresh</button>
             {/* {loadingGoogleMeet ? (
         <p>Loading Google Meet events...</p>
